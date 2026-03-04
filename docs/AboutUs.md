@@ -37,7 +37,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/endersky.png" width="200px">
 
 [[github](http://github.com/endersky)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Backend
@@ -48,8 +47,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/xiuxikwey)]
 
-* Role: Developer
-* Responsibilities: Dev Ops
+* Role: Team lead
+* Responsibilities:
 
 ### James Doe
 
