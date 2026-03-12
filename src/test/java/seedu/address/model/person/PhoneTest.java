@@ -27,15 +27,13 @@ public class PhoneTest {
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
-        assertFalse(Phone.isValidPhone("phone")); // non-numeric
-        assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone(" 911")); // space before
 
         // valid phone numbers
-        assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
-        assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone("a")); // exactly 1 character
+        assertTrue(Phone.isValidPhone("9  1 ")); // spaces between and after
+        assertTrue(Phone.isValidPhone("(Home) +(90) 1234 5678")); // special characters
+        assertTrue(Phone.isValidPhone("124293842033123")); // long phone number
     }
 
     @Test
@@ -56,5 +54,14 @@ public class PhoneTest {
 
         // different values -> returns false
         assertFalse(phone.equals(new Phone("995")));
+
+        // leading spaces -> returns false
+        assertFalse(phone.equals(" 999"));
+
+        // spaces in the middle -> returns false
+        assertFalse(phone.equals(new Phone("9 99")));
+
+        // trailing spaces -> returns false
+        assertFalse(phone.equals(new Phone("999 ")));
     }
 }

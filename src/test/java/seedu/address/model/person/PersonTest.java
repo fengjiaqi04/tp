@@ -42,14 +42,10 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        /* phone has trailing spaces, all other attributes same -> returns false
+        // phone has trailing spaces, all other attributes same -> returns false
         String phoneWithTrailingSpaces = VALID_PHONE_BOB + " ";
         Person editedBob = new PersonBuilder(BOB).withPhone(phoneWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
-
-        // phone differs in case, all other attributes same -> returns false
-        editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));*/
     }
 
     @Test
