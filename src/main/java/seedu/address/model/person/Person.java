@@ -56,19 +56,13 @@ public class Person {
      */
     public Person(Person person, Pet pet) {
         requireAllNonNull(person, pet);
-        Set<Pet> currentPets = person.getPets();
-        Set<Pet> newPets = new HashSet<>();
-        for (Pet p : currentPets) {
-            newPets.add(p);
-        }
-        newPets.add(pet);
-
         this.name = person.getName();
         this.phone = person.getPhone();
         this.email = person.getEmail();
         this.address = person.getAddress();
         this.tags.addAll(person.getTags());
-        this.pets.addAll(newPets);
+        this.pets.addAll(person.getPets());
+        this.pets.add(pet);
     }
 
     public Name getName() {
