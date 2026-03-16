@@ -152,8 +152,9 @@ public class ModelManagerTest {
         seedu.address.model.person.Pet pet = new seedu.address.model.person.Pet(
                 new seedu.address.model.person.Name("Doggy"));
         model.addPet(pet, person.getPhone());
-        // Should not throw and filtered list should still contain the person
-        assertTrue(model.getFilteredPersonList().contains(person));
+        // Should not throw and filtered list should still contain a person with the same phone
+        assertTrue(model.getFilteredPersonList().stream()
+                .anyMatch(p -> p.getPhone().equals(person.getPhone())));
     }
 
     @Test
