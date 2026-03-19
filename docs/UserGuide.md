@@ -16,7 +16,7 @@ You can register clients and their pets, so that after grooming a pet, you can f
 
 ## Installation
 
-1. [Install Java `17` or higher to your computer](https://se-education.org/guides/tutorials/javaInstallation.html).
+1. [Install](https://se-education.org/guides/tutorials/javaInstallation.html) Java `17` or higher to your computer.
 
 1. Click on `tp.jar` to download it from [here](https://github.com/AY2526S2-CS2103T-F14-2/tp/releases).
 
@@ -63,30 +63,30 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a client: `client`
+### Adding a client: `addClient`
 
-Registers a new client.
-
-Format: `client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Registers a new client. The new client will be shown on the list.
 
 <box type="tip" seamless>
 
-**Tip:** Clients can have the same name, but never the same phone number
+**Important:** Clients can have the same name, but never the same phone number
 </box>
 
-Examples:
-* `client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `client n/Betsy Crowe t/friend e/betsycrowe@example.com a/Crown street p/1234567`
-
-### Adding a pet: `pet`
-
-Registers a new pet of a client. The name of the pet and the phone number of the client are needed.
-
-Format: `pet n/NAME p/PHONE_NUMBER​ [s/SPECIES] [b/BREED]`
+Format: `addClient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 Examples:
-* `pet n/Snowy p/0000 s/Dog b/Wire Fox Terrier (White)`
-* `pet n/Meowy p/123456`
+* `addClient n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `addClient n/Betsy Crowe t/friend e/betsycrowe@example.com a/Crown street p/1234567`
+
+### Adding a pet: `addPet`
+
+Registers a new pet of a client. The name of the pet and the **phone number of the client** are needed.
+
+Format: `addPet n/NAME p/PHONE_NUMBER​ [s/SPECIES] [b/BREED]`
+
+Examples:
+* `addPet n/Snowy p/0000 s/Dog b/Wire Fox Terrier (White)`
+* `addPet n/Meowy p/123456`
 
 ### Listing all clients and pets : `list`
 
@@ -98,31 +98,28 @@ Format: `list`
 
 Edits an existing client.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* Edits the client at the specified `POSITION`. The `POSITION` refers to the number shown next to the client.​
+* Specified values will override old values.
+* Editing tags will clear previous tags
+* You can remove a client’s tags by typing `t/` without
     specifying any tags after it.
 
+Format: `editClient POSITION [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `editClient 1 p/91234567 e/johndoe@example.com` Edits the details of the client in `POSITION` 1.
+*  `editClient 2 n/Betsy Crower t/` Changes the name of the client in `POSITION` 2 to `Betsy Crower` and clears their tags.
 
 ### Locating clients by name: `find`
 
-Finds clients whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Finds clients whose names contain **any** of the given keywords.
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -133,20 +130,18 @@ Examples:
 
 Deletes the specified client.
 
-Format: `deleteClient INDEX`
+* Deletes the client at the specified `POSITION`.
+* The `POSITION` refers to the `POSITION` number shown in the displayed client list.​
 
-* Deletes the client at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format: `deleteClient POSITION`
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
+* `list` followed by `delete 2` deletes the client with `POSITION` 2 in the displayed list.
+* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 ### Deleting a pet : `deletePet`
 
-Deletes the pet with the specified name, belonging to the owner with the phone number.
+Deletes the pet with the specified name, belonging to the **owner with the phone number**.
 
 Format: `deletePet n/NAME p/PHONE_NUMBER`
 
@@ -168,7 +163,7 @@ Format: `exit`
 
 ### Saving the data
 
-Data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Data is saved automatically. There is no need to save manually.
 
 ### Editing the data file
 
@@ -205,10 +200,13 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Client**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**AddClient** | `addClient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addClient n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend`
+**AddPet** | `addPet n/NAME p/PHONE_NUMBER​` <br> e.g., `addPet n/Meowy p/22224444`
 **Clear**  | `clear`
-**DeleteClient** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**DeleteClient** | `deleteClient POSITION`<br> e.g., `deleteClient 3`
+**DeletePet** | `deletePet n/NAME p/PHONE_NUMBER`<br> e.g., `deletePet n/Meowy p/22224444`
+**EditClient**   | `editClient POSITION [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editClient 2 n/James Lee e/jameslee@example.com`
+**Exit**   | `exit`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help**   | `help`
 **List**   | `list`
