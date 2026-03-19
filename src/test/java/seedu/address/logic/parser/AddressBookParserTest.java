@@ -16,8 +16,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.DeletePetCommand;
+import seedu.address.logic.commands.EditClientCommand;
+import seedu.address.logic.commands.EditClientCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -54,12 +55,19 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_deletePet() throws Exception {
+        DeletePetCommand command = (DeletePetCommand) parser.parseCommand(
+                DeletePetCommand.COMMAND_WORD + " n/Snoopy p/99999999");
+        assertTrue(command instanceof seedu.address.logic.commands.DeletePetCommand);
+    }
+
+    @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditClientCommand command = (EditClientCommand) parser.parseCommand(EditClientCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditClientCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
@@ -99,12 +107,4 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 
-    @Test
-    public void parseCommand_deletePet() throws Exception {
-        seedu.address.model.person.Pet pet = new seedu.address.model.person.Pet(
-                new seedu.address.model.person.Name("Snoopy"), "", "");
-        String phone = "99999999";
-        String commandString = "deletePet n/Snoopy p/99999999";
-        assertTrue(parser.parseCommand(commandString) instanceof seedu.address.logic.commands.DeletePetCommand);
-    }
 }
