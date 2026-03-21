@@ -22,7 +22,11 @@ public class FindCommand extends Command {
 
     private final FindPredicate predicate;
 
+    /**
+     * Creates a FindCommand to match keywords in {@code FindPredicate}.
+     */
     public FindCommand(FindPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 

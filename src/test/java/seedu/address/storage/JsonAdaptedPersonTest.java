@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,8 +16,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Pet;
 import seedu.address.model.person.Phone;
-import seedu.address.model.util.SampleDataUtil;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "  ";
@@ -33,15 +34,16 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedPet> VALID_PETS =
-            SampleDataUtil.getPetSet("Dog").stream()
-            .map(JsonAdaptedPet::new)
-            .collect(Collectors.toList());;
+    private static final List<JsonAdaptedPet> VALID_PETS = Stream.of(
+            new JsonAdaptedPet(VALID_NAME, VALID_NAME, VALID_NAME))
+            .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
-        assertEquals(BENSON, person.toModelType());
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_PETS);
+        assertEquals(BENSON.addPet(new Pet(new Name(VALID_NAME), VALID_NAME, VALID_NAME)),
+                person.toModelType());
     }
 
     @Test
