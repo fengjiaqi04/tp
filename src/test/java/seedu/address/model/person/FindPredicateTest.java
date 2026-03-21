@@ -60,7 +60,7 @@ public class FindPredicateTest {
 
         // Matching client email and pet species
         predicate = new FindPredicate(Arrays.asList("AlicE", "dog"));
-        assertTrue(predicate.test(new PersonBuilder().withEmail("AliceBob")
+        assertTrue(predicate.test(new PersonBuilder().withEmail("AliceBob@aa.com")
                 .withPet(new PetBuilder().withSpecies("doggy").build())
                 .build()));
 
