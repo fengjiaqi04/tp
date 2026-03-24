@@ -103,8 +103,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Returns a {@code Person} with the stored details.
+     * @return
+     */
     public Person build() {
-        return new Person(new Person(name, phone, email, address, tags), pets);
+        Person person = new Person(name, phone, email, address, tags);
+        for (Pet pet : pets) {
+            person = person.addPet(pet);
+        };
+        return person;
     }
 
 }

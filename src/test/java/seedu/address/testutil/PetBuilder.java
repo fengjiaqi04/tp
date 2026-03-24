@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BREED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIES;
 
 import seedu.address.model.person.Name;
@@ -13,21 +14,23 @@ import seedu.address.model.person.Pet;
 public class PetBuilder {
 
     public static final String DEFAULT_NAME = "Snoopy";
-    public static final String DEFAULT_SPECIES = "dog";
-    public static final String DEFAULT_BREED = "beagle";
+    public static final String DEFAULT_SPECIES = "Dog";
+    public static final String DEFAULT_BREED = "Labrador";
+    public static final String DEFAULT_NOTE = "Very friendly";
 
     private Name name;
-    private String species;
-    private String breed;
+    private Name species;
+    private Name breed;
+    private Name note;
 
     /**
      * Creates a {@code PetBuilder} with the default details.
      */
     public PetBuilder() {
         name = new Name(DEFAULT_NAME);
-        species = DEFAULT_SPECIES;
-        breed = DEFAULT_BREED;
-
+        species = new Name(DEFAULT_SPECIES);
+        breed = new Name(DEFAULT_BREED);
+        note = new Name(DEFAULT_NOTE);
     }
 
     /**
@@ -37,6 +40,7 @@ public class PetBuilder {
         name = petToCopy.getName();
         species = petToCopy.getSpecies();
         breed = petToCopy.getBreed();
+        note = petToCopy.getNote();
     }
 
     /**
@@ -48,36 +52,44 @@ public class PetBuilder {
     }
 
     /**
-     * Sets the {@code species} of the {@code Pet} that we are building.
+     * Sets the {@code Species} of the {@code Person} that we are building.
      */
     public PetBuilder withSpecies(String species) {
-        this.species = species;
+        this.species = new Name(species);
         return this;
     }
 
     /**
-     * Sets the {@code breed} of the {@code Pet} that we are building.
+     * Sets the {@code Breed} of the {@code Person} that we are building.
      */
     public PetBuilder withBreed(String breed) {
-        this.breed = breed;
+        this.breed = new Name(breed);
         return this;
     }
 
     /**
-     * Returns a pet with the stored fields
+     * Sets the {@code Note} of the {@code Person} that we are building.
      */
-    public Pet build() {
-        return new Pet(name, species, breed);
+    public PetBuilder withNote(String note) {
+        this.note = new Name(note);
+        return this;
     }
 
     /**
-     * Returns the string representation of the pet to be passed to the parser.
+     * Builds the Pet object.
+     */
+    public Pet build() {
+        return new Pet(name, species, breed, note);
+    }
+
+    /**
+     * Returns user input to recreate descriptor.
      */
     public String getCommandFormat() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + name.fullName + " ");
-        sb.append(PREFIX_BREED + breed + " ");
-        sb.append(PREFIX_SPECIES + species);
-        return sb.toString();
+        return PREFIX_NAME.toString() + name + " "
+                + PREFIX_SPECIES + species + " "
+                + PREFIX_BREED + breed + " "
+                + PREFIX_NOTE + note;
     }
+
 }

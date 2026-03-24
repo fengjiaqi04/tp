@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -23,7 +24,7 @@ public class DeletePetCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Pet expectedPet = new PetBuilder().withSpecies("").withBreed("").build();
+        Pet expectedPet = new PetBuilder().withName(VALID_PET_NAME).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, VALID_PET_NAME_DESC + PHONE_DESC_AMY,

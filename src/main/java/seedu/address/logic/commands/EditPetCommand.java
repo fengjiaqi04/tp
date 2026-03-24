@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BREED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIES;
 
 import java.util.List;
@@ -36,7 +37,8 @@ public class EditPetCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Meowy"
             + PREFIX_SPECIES + "cat"
-            + PREFIX_BREED + "persian";
+            + PREFIX_BREED + "persian"
+            + PREFIX_NOTE + "Good kitty";
 
     public static final String MESSAGE_EDIT_PET_SUCCESS = "Edited Pet: %1$s";
     public static final String MESSAGE_INDEX_TOO_SMALL = "The POSITION provided should be 1 or more";
@@ -95,10 +97,10 @@ public class EditPetCommand extends Command {
     private static Pet createEditedPet(Pet petToEdit, EditPetDescriptor editPetDescriptor) {
 
         Name updatedName = editPetDescriptor.getName().orElse(petToEdit.getName());
-        String updatedSpecies = editPetDescriptor.getSpecies().orElse(petToEdit.getSpecies());
-        String updatedBreed = editPetDescriptor.getBreed().orElse(petToEdit.getBreed());
-
-        return new Pet(updatedName, updatedSpecies, updatedBreed);
+        Name updatedSpecies = editPetDescriptor.getSpecies().orElse(petToEdit.getSpecies());
+        Name updatedBreed = editPetDescriptor.getBreed().orElse(petToEdit.getBreed());
+        Name updatedNote = editPetDescriptor.getBreed().orElse(petToEdit.getBreed());
+        return new Pet(updatedName, updatedSpecies, updatedBreed, updatedNote);
     }
 
     @Override
@@ -132,8 +134,9 @@ public class EditPetCommand extends Command {
      */
     public static class EditPetDescriptor {
         private Name name;
-        private String species;
-        private String breed;
+        private Name species;
+        private Name breed;
+        private Name note;
 
         public EditPetDescriptor() {
         }
@@ -146,13 +149,14 @@ public class EditPetCommand extends Command {
             setName(toCopy.name);
             setSpecies(toCopy.species);
             setBreed(toCopy.breed);
+            setNote(toCopy.note);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, species, breed);
+            return CollectionUtil.isAnyNonNull(name, species, breed, note);
         }
 
         public void setName(Name name) {
@@ -163,20 +167,28 @@ public class EditPetCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setSpecies(String species) {
+        public void setSpecies(Name species) {
             this.species = species;
         }
 
-        public Optional<String> getSpecies() {
+        public Optional<Name> getSpecies() {
             return Optional.ofNullable(species);
         }
 
-        public void setBreed(String breed) {
+        public void setBreed(Name breed) {
             this.breed = breed;
         }
 
-        public Optional<String> getBreed() {
+        public Optional<Name> getBreed() {
             return Optional.ofNullable(breed);
+        }
+
+        public void setNote(Name note) {
+            this.note = note;
+        }
+
+        public Optional<Name> getNote() {
+            return Optional.ofNullable(note);
         }
 
         @Override
@@ -193,7 +205,8 @@ public class EditPetCommand extends Command {
             EditPetDescriptor otherEditPetDescriptor = (EditPetDescriptor) other;
             return Objects.equals(name, otherEditPetDescriptor.name)
                     && Objects.equals(species, otherEditPetDescriptor.species)
-                    && Objects.equals(breed, otherEditPetDescriptor.breed);
+                    && Objects.equals(breed, otherEditPetDescriptor.breed)
+                    && Objects.equals(note, otherEditPetDescriptor.note);
         }
 
         @Override
@@ -202,6 +215,7 @@ public class EditPetCommand extends Command {
                     .add("name", name)
                     .add("species", species)
                     .add("breed", breed)
+                    .add("note", note)
                     .toString();
         }
     }

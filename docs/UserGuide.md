@@ -123,16 +123,14 @@ Examples:
 *  `editPet 1 s/cat` Edits the species of the pet in `POSITION` 1.
 *  `editPet 2 n/Gunner` Changes the name of the pet in `POSITION` 2 to `Gunner`
 
-### Locating clients by name: `findClient`
+### Locating clients by name: `find`
 
-Finds clients whose names contain **any** of the given keywords.
+Finds pets and clients who match **all** of the given keywords.
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The match is partial and case-insensitive. e.g `Roy` will match `Leroy`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
 
-Format: `findClient KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD...`
 
 Examples:
 * `findClient John` returns `john` and `John Doe`
@@ -222,7 +220,7 @@ Action     | Format, Examples
 **EditPet**   | `editPet POSITION [n/NAME] [s/SPECIES] [b/BREED]`<br>
 e.g.,`editPet 2 n/Pongo`
 **Exit**   | `exit`
-**FindClient**   | `findClient KEYWORD [MORE_KEYWORDS]`<br> e.g., `findClient James Jake`
+**Find**   | `find KEYWORD...`<br> e.g., `find James dog`
 **Help**   | `help`
 **List**   | `list`
 

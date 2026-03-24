@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPets.MEOWY;
+import static seedu.address.testutil.TypicalPets.SNOOPY;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +24,6 @@ import seedu.address.model.person.Pet;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.EditPetDescriptorBuilder;
 import seedu.address.testutil.PetBuilder;
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
  * EditPetCommand.
@@ -36,23 +37,22 @@ public class EditPetCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Pet original = new PetBuilder().build();
-        model.addPet(original, new Phone(FIRST_PERSON_PHONE));
+        model.addPet(SNOOPY, new Phone(FIRST_PERSON_PHONE));
 
-        Pet editedPet = new PetBuilder().withName(DIFFERENT_PET_NAME).build();
-        EditPetDescriptor descriptor = new EditPetDescriptorBuilder(editedPet).build();
+        EditPetDescriptor descriptor = new EditPetDescriptorBuilder(MEOWY).build();
         EditPetCommand editPetCommand = new EditPetCommand(INDEX_FIRST_PERSON, descriptor);
         String expectedMessage = String.format(EditPetCommand.MESSAGE_EDIT_PET_SUCCESS,
-                Messages.format(editedPet));
+                Messages.format(MEOWY));
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.addPet(editedPet, new Phone(FIRST_PERSON_PHONE));
+        expectedModel.addPet(MEOWY, new Phone(FIRST_PERSON_PHONE));
 
         assertCommandSuccess(editPetCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        //edit name
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Pet original = new PetBuilder().build();
         model.addPet(original, new Phone(FIRST_PERSON_PHONE));
@@ -64,6 +64,48 @@ public class EditPetCommandTest {
                 Messages.format(editedPet));
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.addPet(editedPet, new Phone(FIRST_PERSON_PHONE));
+
+        assertCommandSuccess(editPetCommand, model, expectedMessage, expectedModel);
+
+        //edit species
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model.addPet(original, new Phone(FIRST_PERSON_PHONE));
+        editedPet = new PetBuilder().withSpecies(DIFFERENT_PET_NAME).build();
+        descriptor = new EditPetDescriptorBuilder().withSpecies(DIFFERENT_PET_NAME).build();
+        editPetCommand = new EditPetCommand(INDEX_FIRST_PERSON, descriptor);
+        expectedMessage = String.format(EditPetCommand.MESSAGE_EDIT_PET_SUCCESS,
+                Messages.format(editedPet));
+
+        expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.addPet(editedPet, new Phone(FIRST_PERSON_PHONE));
+
+        assertCommandSuccess(editPetCommand, model, expectedMessage, expectedModel);
+
+        //edit breed
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model.addPet(original, new Phone(FIRST_PERSON_PHONE));
+        editedPet = new PetBuilder().withBreed(DIFFERENT_PET_NAME).build();
+        descriptor = new EditPetDescriptorBuilder().withBreed(DIFFERENT_PET_NAME).build();
+        editPetCommand = new EditPetCommand(INDEX_FIRST_PERSON, descriptor);
+        expectedMessage = String.format(EditPetCommand.MESSAGE_EDIT_PET_SUCCESS,
+                Messages.format(editedPet));
+
+        expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.addPet(editedPet, new Phone(FIRST_PERSON_PHONE));
+
+        assertCommandSuccess(editPetCommand, model, expectedMessage, expectedModel);
+
+        //edit note
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model.addPet(original, new Phone(FIRST_PERSON_PHONE));
+        editedPet = new PetBuilder().withNote(DIFFERENT_PET_NAME).build();
+        descriptor = new EditPetDescriptorBuilder().withNote(DIFFERENT_PET_NAME).build();
+        editPetCommand = new EditPetCommand(INDEX_FIRST_PERSON, descriptor);
+        expectedMessage = String.format(EditPetCommand.MESSAGE_EDIT_PET_SUCCESS,
+                Messages.format(editedPet));
+
+        expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.addPet(editedPet, new Phone(FIRST_PERSON_PHONE));
 
         assertCommandSuccess(editPetCommand, model, expectedMessage, expectedModel);
@@ -128,7 +170,7 @@ public class EditPetCommandTest {
     @Test
     public void execute_invalidPetIndexUnfilteredList_failure() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Index outOfBoundIndex = Index.fromOneBased(1);
+        Index outOfBoundIndex = Index.fromOneBased(100000);
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(DIFFERENT_PET_NAME).build();
         EditPetCommand editPetCommand = new EditPetCommand(outOfBoundIndex, descriptor);
 

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_BREED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_NOTE_CUTE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_SPECIES;
 
 import org.junit.jupiter.api.Test;
@@ -20,8 +21,9 @@ public class EditPetDescriptorTest {
         // same values -> returns true
         EditPetDescriptor descriptor = new EditPetDescriptor();
         descriptor.setName(new Name(VALID_PET_NAME));
-        descriptor.setSpecies(VALID_PET_SPECIES);
-        descriptor.setBreed(VALID_PET_BREED);
+        descriptor.setSpecies(new Name(VALID_PET_SPECIES));
+        descriptor.setBreed(new Name(VALID_PET_BREED));
+        descriptor.setNote(new Name(VALID_PET_NOTE_CUTE));
         EditPetDescriptor descriptorWithSameValues = new EditPetDescriptor(descriptor);
         assertTrue(descriptor.equals(descriptorWithSameValues));
 
@@ -45,6 +47,10 @@ public class EditPetDescriptorTest {
         // different breed -> returns false
         edited = new EditPetDescriptorBuilder(descriptor).withBreed("breed").build();
         assertFalse(descriptor.equals(edited));
+
+        // different note -> returns false
+        edited = new EditPetDescriptorBuilder(descriptor).withNote("note").build();
+        assertFalse(descriptor.equals(edited));
     }
 
     @Test
@@ -53,7 +59,8 @@ public class EditPetDescriptorTest {
         String expected = EditPetDescriptor.class.getCanonicalName() + "{name="
                 + editPetDescriptor.getName().orElse(null) + ", species="
                 + editPetDescriptor.getSpecies().orElse(null) + ", breed="
-                + editPetDescriptor.getBreed().orElse(null) + "}";
+                + editPetDescriptor.getBreed().orElse(null) + ", note="
+                + editPetDescriptor.getNote().orElse(null) + "}";
         assertEquals(expected, editPetDescriptor.toString());
     }
 }

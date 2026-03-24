@@ -28,6 +28,7 @@ public class EditPetDescriptorBuilder {
         descriptor.setName(pet.getName());
         descriptor.setSpecies(pet.getSpecies());
         descriptor.setBreed(pet.getBreed());
+        descriptor.setNote(pet.getNote());
     }
 
     /**
@@ -44,7 +45,7 @@ public class EditPetDescriptorBuilder {
      * building.
      */
     public EditPetDescriptorBuilder withSpecies(String species) {
-        descriptor.setSpecies(species);
+        descriptor.setSpecies(new Name(species));
         return this;
     }
 
@@ -53,7 +54,16 @@ public class EditPetDescriptorBuilder {
      * building.
      */
     public EditPetDescriptorBuilder withBreed(String breed) {
-        descriptor.setBreed(breed);
+        descriptor.setBreed(new Name(breed));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Note} of the {@code EditPetDescriptor} that we are
+     * building.
+     */
+    public EditPetDescriptorBuilder withNote(String note) {
+        descriptor.setNote(new Name(note));
         return this;
     }
 

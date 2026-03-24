@@ -6,10 +6,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_BREED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_BREED_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_NOTE_CUTE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_NOTE_CUTE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_SPECIES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PET_SPECIES_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BREED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIES;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -70,9 +73,10 @@ public class EditPetCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + VALID_PET_NAME_DESC + VALID_PET_SPECIES_DESC
-                + VALID_PET_BREED_DESC;
+                + VALID_PET_BREED_DESC + VALID_PET_NOTE_CUTE_DESC;
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(VALID_PET_NAME)
-                .withSpecies(VALID_PET_SPECIES).withBreed(VALID_PET_BREED).build();
+                .withSpecies(VALID_PET_SPECIES)
+                .withBreed(VALID_PET_BREED).withNote(VALID_PET_NOTE_CUTE).build();
         EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -112,6 +116,12 @@ public class EditPetCommandParserTest {
         descriptor = new EditPetDescriptorBuilder().withBreed(VALID_PET_BREED).build();
         expectedCommand = new EditPetCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+
+        // note
+        userInput = targetIndex.getOneBased() + VALID_PET_NOTE_CUTE_DESC;
+        descriptor = new EditPetDescriptorBuilder().withNote(VALID_PET_NOTE_CUTE).build();
+        expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -127,9 +137,12 @@ public class EditPetCommandParserTest {
 
         // multiple repeated fields
         userInput = targetIndex.getOneBased() + VALID_PET_NAME_DESC + VALID_PET_NAME_DESC
-                + VALID_PET_SPECIES_DESC + VALID_PET_SPECIES_DESC + VALID_PET_BREED_DESC + VALID_PET_BREED_DESC;
+                + VALID_PET_SPECIES_DESC + VALID_PET_SPECIES_DESC
+                + VALID_PET_BREED_DESC + VALID_PET_BREED_DESC
+                + VALID_PET_NOTE_CUTE_DESC + VALID_PET_NOTE_CUTE_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_SPECIES, PREFIX_BREED));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME,
+                        PREFIX_SPECIES, PREFIX_BREED, PREFIX_NOTE));
     }
 }

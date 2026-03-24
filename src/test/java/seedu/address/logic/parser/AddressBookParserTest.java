@@ -22,11 +22,11 @@ import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditPetCommand;
 import seedu.address.logic.commands.EditPetCommand.EditPetDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindClientCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.FindPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Pet;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -94,9 +94,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_findClient() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindClientCommand command = (FindClientCommand) parser.parseCommand(
-                FindClientCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindClientCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindCommand command = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new FindPredicate(keywords)), command);
     }
 
     @Test

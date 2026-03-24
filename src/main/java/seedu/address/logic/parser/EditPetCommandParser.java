@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BREED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIES;
 
 import seedu.address.commons.core.index.Index;
@@ -26,7 +27,7 @@ public class EditPetCommandParser implements Parser<EditPetCommand> {
     public EditPetCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_NAME, PREFIX_SPECIES, PREFIX_BREED);
+                PREFIX_NAME, PREFIX_SPECIES, PREFIX_BREED, PREFIX_NOTE);
         Index index;
 
         try {
@@ -37,7 +38,7 @@ public class EditPetCommandParser implements Parser<EditPetCommand> {
                     pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_SPECIES, PREFIX_BREED);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_SPECIES, PREFIX_BREED, PREFIX_NOTE);
 
         EditPetDescriptor editPetDescriptor = new EditPetDescriptor();
 
@@ -45,10 +46,13 @@ public class EditPetCommandParser implements Parser<EditPetCommand> {
             editPetDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_SPECIES).isPresent()) {
-            editPetDescriptor.setSpecies(argMultimap.getValue(PREFIX_SPECIES).get());
+            editPetDescriptor.setSpecies(ParserUtil.parseName(argMultimap.getValue(PREFIX_SPECIES).get()));
         }
         if (argMultimap.getValue(PREFIX_BREED).isPresent()) {
-            editPetDescriptor.setBreed(argMultimap.getValue(PREFIX_BREED).get());
+            editPetDescriptor.setBreed(ParserUtil.parseName(argMultimap.getValue(PREFIX_BREED).get()));
+        }
+        if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
+            editPetDescriptor.setNote(ParserUtil.parseName(argMultimap.getValue(PREFIX_NOTE).get()));
         }
 
         if (!editPetDescriptor.isAnyFieldEdited()) {
