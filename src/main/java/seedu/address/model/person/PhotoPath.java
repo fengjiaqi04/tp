@@ -42,6 +42,10 @@ public class PhotoPath {
 
         // Check if given path is a classpath
         if (trimmedPath.startsWith("/")) {
+            // If file has no extension, it's likely a directory
+            if (!trimmedPath.contains(".")) {
+                return false;
+            }
             InputStream stream = seedu.address.MainApp.class.getResourceAsStream(trimmedPath);
             if (stream != null) {
                 try {

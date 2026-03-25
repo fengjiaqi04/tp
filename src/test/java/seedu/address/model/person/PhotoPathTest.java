@@ -35,6 +35,9 @@ public class PhotoPathTest {
         // valid file path but does not exist
         assertFalse(PhotoPath.isValidPhotoPath("images/address_book_32.png"));
 
+        // valid file path and exists but is not a file
+        assertFalse(PhotoPath.isValidPhotoPath("/images"));
+
         // valid photo path
         assertTrue(PhotoPath.isValidPhotoPath("/images/placeholder-pet-logo.png"));
     }
@@ -57,5 +60,13 @@ public class PhotoPathTest {
 
         // different values -> returns false
         assertFalse(photoPath.equals(new PhotoPath("/images/clock.png")));
+    }
+
+    @Test
+    public void hashCode_sameValues_sameHashCode() {
+        PhotoPath photoPath1 = new PhotoPath("/images/placeholder-pet-logo.png");
+        PhotoPath photoPath2 = new PhotoPath("/images/placeholder-pet-logo.png");
+
+        assertTrue(photoPath1.hashCode() == photoPath2.hashCode());
     }
 }

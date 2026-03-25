@@ -43,7 +43,7 @@ public class AppUtil {
         requireNonNull(placeholderPath);
         Image image;
         try {
-            if (imagePath.startsWith("/")) {
+            if (isClasspathResource(imagePath)) {
                 // Use classpath resource
                 InputStream stream = MainApp.class.getResourceAsStream(imagePath);
                 if (stream == null) {
@@ -65,6 +65,12 @@ public class AppUtil {
             image = new Image(fallbackStream);
         }
         return image;
+    }
+
+    private static boolean isClasspathResource(String path) {
+        return path.startsWith("/")
+                && !path.contains(":") // Not Windows drive letter
+                && !path.startsWith("//"); // Not UNC path
     }
 
     /**
