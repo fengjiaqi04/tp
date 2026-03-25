@@ -91,11 +91,8 @@ public class JsonAdaptedPet {
         }
         final Name modelNote = new Name(note);
 
-        if (photoPath == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "PhotoPath"));
-        }
         String editedPath = photoPath;
-        if (!PhotoPath.isValidPhotoPath(photoPath)) {
+        if (photoPath == null || !PhotoPath.isValidPhotoPath(photoPath)) {
             editedPath = PLACEHOLDER_IMAGE_PATH.toString();
         }
         final PhotoPath modelPhotoPath = new PhotoPath(editedPath);

@@ -106,10 +106,11 @@ public class JsonAdaptedPetTest {
     }
 
     @Test
-    public void toModelType_nullPetPhotoPath_throwsIllegalValueException() {
+    public void toModelType_nullPetPhotoPath_returnsPetWithPlaceholderImage() throws Exception {
         JsonAdaptedPet pet = new JsonAdaptedPet(VALID_PET_NAME, VALID_PET_SPECIES, VALID_PET_BREED, VALID_PET_NOTE,
                 null);
-        String expectedMessage = String.format(String.format(MISSING_FIELD_MESSAGE_FORMAT, "PhotoPath"));
-        assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
+        Pet expectedPet = new Pet(new Name(VALID_PET_NAME), new Name(VALID_PET_SPECIES), new Name(VALID_PET_BREED),
+                new Name(VALID_PET_NOTE), new PhotoPath(PLACEHOLDER_IMAGE_PATH.toString()));
+        assertEquals(expectedPet, pet.toModelType());
     }
 }

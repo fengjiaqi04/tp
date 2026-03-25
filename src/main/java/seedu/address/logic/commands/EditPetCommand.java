@@ -233,6 +233,7 @@ public class EditPetCommand extends Command {
                     .add("species", species)
                     .add("breed", breed)
                     .add("note", note)
+                    .add("photoPath", photoPath)
                     .toString();
         }
     }
