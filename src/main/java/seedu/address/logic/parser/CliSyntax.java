@@ -19,5 +19,4 @@ public class CliSyntax {
 
     /* Default file paths */
     public static final String PLACEHOLDER_IMAGE_PATH = "src/main/resources/images/placeholder-pet-logo.png";
-    public static final String IMG_NOT_FOUND_PATH = "src/main/resources/images/image-not-found.png";
 }

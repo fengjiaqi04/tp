@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import static seedu.address.logic.parser.CliSyntax.IMG_NOT_FOUND_PATH;
+import static seedu.address.logic.parser.CliSyntax.PLACEHOLDER_IMAGE_PATH;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -96,7 +96,7 @@ public class JsonAdaptedPet {
         }
         String editedPath = photoPath;
         if (!PhotoPath.isValidPhotoPath(photoPath)) {
-            editedPath = IMG_NOT_FOUND_PATH.toString();
+            editedPath = PLACEHOLDER_IMAGE_PATH.toString();
         }
         final PhotoPath modelPhotoPath = new PhotoPath(editedPath);
 
