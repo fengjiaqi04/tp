@@ -54,7 +54,8 @@ PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-PersonCard ..> Model
+PetCard .> Model
+PersonCard .> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
