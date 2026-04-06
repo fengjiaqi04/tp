@@ -82,6 +82,12 @@ public interface Model {
      */
     void addPerson(Person person);
 
+    /**
+     * Adds the given person to the front of the list.
+     * {@code person} must not already exist in the address book.
+     */
+    void addPersonToFront(Person person);
+
     void addPet(Pet pet, Phone phone);
 
     void removePet(Pet pet, Phone phone);

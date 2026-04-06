@@ -132,6 +132,11 @@ public class AddPetCommandTest {
         }
 
         @Override
+        public void addPersonToFront(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPet(Pet pet, Phone phone) {
             throw new AssertionError("This method should not be called."); }
 
