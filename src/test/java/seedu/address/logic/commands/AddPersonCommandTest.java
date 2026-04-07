@@ -127,6 +127,11 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public void addPersonToFront(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPet(Pet pet, Phone phone) {
             throw new AssertionError("This method should not be called."); }
 
@@ -212,7 +217,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void addPersonToFront(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
         }
