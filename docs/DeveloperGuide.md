@@ -33,10 +33,10 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 The ***Architecture Diagram*** shows the high-level design of the app.
 It is a Model-View-Controller design, where
-* The user interacts with the UI...
-* Requested changes are passed through the Logic interface...
-* These changes are reflected in the Model and Storage...
-* And the UI listens for and displays changes accordingly.
+* The user interacts with the [**`UI`**](#ui-component)...
+* Requested changes are passed through the [**`Logic`**](#logic-component) interface...
+* These changes are reflected in the [**`Model`**](#model-component) and [**`Storage`**](#storage-component)...
+* And the [**`UI`**](#ui-component) listens for and displays changes accordingly.
 
 ### Sequence of program execution
 
@@ -524,10 +524,10 @@ A **Precondition** is that the system is displaying the list of clients and pets
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 clients with 5 pets each without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The response to any use action should become visible within 5 seconds.
-5. The app should not crash due to a user action (e.g., entering an invalid command, or deleting a person that does not exist).
+5. The app should not crash due to a user action (e.g., entering an invalid command, or deleting a client that does not exist).
 6. The app should not crash due to a system error (e.g., hard disk failure, or running out of memory).
 7. The app should not crash due to a programmer error (e.g., null pointer exception, or array index out of bounds exception).
 8. Should not have a steep learning curve for users who are reasonably comfortable using CLI apps.
