@@ -171,11 +171,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `deleteClient 5` command to delete the 5th client in the address book. The `deleteClient` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `deleteClient 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `addClient n/David p/PHONE …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -446,10 +446,8 @@ A **Precondition** is that the system is displaying the list of clients and pets
 **MSS**
 
 1.  User finds the client to edit.
-2.  User deletes the client (UC3).
-3.  System deletes the client and displays the updated list.
-4.  User adds the updated client and their pets (UC1).
-5.  System adds the client and displays the updated list.
+2.  User requests to edit the client.
+3.  System edits the client and displays the updated list.
 
     Use case ends.
 
@@ -459,15 +457,21 @@ A **Precondition** is that the system is displaying the list of clients and pets
 
      Use case ends.
 
+* 2a. The given parameters are invalid.
+
+    * 2a1. System shows an error message.
+    * 2a2. User makes new request to edit a client.
+      Steps 2a1-2a2 are repeated until the parameters are valid.
+
+      Use case resumes at step 3.
+
 **Use case 6: Edit details of a pet**
 
 **MSS**
 
 1.  User finds the pet to edit.
-2.  User deletes the pet (UC4).
-3.  System deletes the pet and displays the updated list.
-4.  User adds the updated pet to the client (UC2).
-5.  System adds the pet and displays the updated list.
+2.  User requests to edit the pet.
+3.  System edits the pet and displays the updated list.
 
     Use case ends.
 
@@ -477,11 +481,19 @@ A **Precondition** is that the system is displaying the list of clients and pets
 
      Use case ends.
 
+* 2a. The given parameters are invalid.
+
+    * 2a1. System shows an error message.
+    * 2a2. User makes new request to edit a pet.
+      Steps 2a1-2a2 are repeated until the parameters are valid.
+
+      Use case resumes at step 3.
+
 **Use case 7: Search for pet of client**
 
 **MSS**
 
-1.  User looks for the client.
+1.  User looks for the client using keywords.
 2.  User looks for their pet.
 
     Use case ends.
@@ -496,7 +508,7 @@ A **Precondition** is that the system is displaying the list of clients and pets
 
 **MSS**
 
-1.  User looks for the pet.
+1.  User looks for the pet using keywords.
 2.  User looks for the client.
 
     Use case ends.
