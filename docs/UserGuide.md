@@ -70,8 +70,8 @@ In the app, type a command in the command box and press Enter to execute it. (e.
 * Items in square brackets are optional.<br>
   e.g `[t/TAG]` can be ignored.
 
-* Items with `…`​ can be used multiple times.<br>
-  e.g. `[t/TAG]…​` can be used as `t/friend t/family`
+* Items with `…` can be used multiple times.<br>
+  e.g. `[t/TAG]…` can be used as `t/friend t/family`
 
 * Items can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -99,7 +99,7 @@ Registers a new client. The new client will be shown on the list.
 **Important:** Clients cannot have the same phone number
 </box>
 
-Format: `addClient p/PHONE_NUMBER [n/NAME] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `addClient p/PHONE_NUMBER [n/NAME] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 
 Examples:
 * `addClient n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -109,7 +109,9 @@ Examples:
 
 Registers a new pet of a client. The name of the pet and the **phone number of the client** are needed.
 
-Format: `addPet n/NAME p/PHONE_NUMBER​ [s/SPECIES] [b/BREED] [nt/NOTES] [ph/PHOTO]`
+Note: Pets can only be added after their owner has been added.
+
+Format: `addPet n/NAME p/PHONE_NUMBER [s/SPECIES] [b/BREED] [nt/NOTES] [ph/PHOTO]`
 
 Examples:
 * `addPet n/Snowy p/0000 s/Dog b/Wire Fox Terrier (White)`
@@ -125,13 +127,13 @@ Format: `list`
 
 Edits an existing client.
 
-* Edits the client at the specified `POSITION`. The `POSITION` refers to the number shown next to the client.​
+* Edits the client at the specified `POSITION`. The `POSITION` refers to the number shown next to the client.
 * Specified values will override old values.
 * Editing tags will clear previous tags
 * You can remove a client’s tags by typing `t/` without
     specifying any tags after it.
 
-Format: `editClient POSITION [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `editClient POSITION [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 
 Examples:
 *  `editClient 1 p/91234567 e/johndoe@example.com` Edits the details of the client in `POSITION` 1.
@@ -144,7 +146,7 @@ Edits an existing pet.
 * Edits the pet at the specified `POSITION`. The `POSITION` refers to the number shown next to the pet.​
 * Specified values will override old values.
 
-Format: `editPet POSITION [n/NAME] [s/SPECIES] [b/BREED]​ [nt/NOTES] [ph/PHOTO]`
+Format: `editPet POSITION [n/NAME] [s/SPECIES] [b/BREED] [nt/NOTES] [ph/PHOTO]`
 
 Examples:
 *  `editPet 1 s/cat` Edits the species of the pet in `POSITION` 1.
@@ -171,7 +173,9 @@ Examples:
 Deletes the specified client.
 
 * Deletes the client at the specified `POSITION`.
-* The `POSITION` refers to the `POSITION` number shown in the displayed client list.​
+* The `POSITION` refers to the `POSITION` number shown in the displayed client list.
+
+Note: All the pets of the specified client will be deleted too.
 
 Format: `deleteClient POSITION`
 
@@ -184,7 +188,8 @@ Examples:
 Deletes a pet.
 
 * Deletes the pet at the specified `POSITION`.
-* The `POSITION` refers to the `POSITION` number shown next to the pet.​
+* The `POSITION` refers to the `POSITION` number shown next to the pet.
+
 Format: `deletePet POSITION`
 
 Examples:
@@ -201,6 +206,10 @@ Format: `clear`
 Exits the app.
 
 Format: `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Storing data
 
 ### Saving the data
 
