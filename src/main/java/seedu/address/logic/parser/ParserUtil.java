@@ -184,6 +184,10 @@ public class ParserUtil {
     public static PhotoPath parsePhotoPath(String path) throws ParseException {
         requireNonNull(path);
         String trimmedPath = path.trim();
+        // Strip quotes if present
+        if (trimmedPath.startsWith("\"") && trimmedPath.endsWith("\"")) {
+            trimmedPath = trimmedPath.substring(1, trimmedPath.length() - 1);
+        }
         if (!PhotoPath.isValidPhotoPath(trimmedPath)) {
             throw new ParseException(PhotoPath.MESSAGE_CONSTRAINTS);
         }
