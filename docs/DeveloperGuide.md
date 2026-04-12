@@ -401,6 +401,7 @@ A **Precondition** is that the system is displaying the list of clients and pets
 
 * 1a. There are no existing clients.
 
+    * 1a1. System notifies user.
      Use case ends.
 
 * 2a. The given parameters are invalid.
@@ -426,6 +427,7 @@ A **Precondition** is that the system is displaying the list of clients and pets
 
 * 1a. There are no clients to delete.
 
+    * 1a1. System notifies user.
      Use case ends.
 
 * 2a. The given parameters are invalid.
@@ -452,6 +454,7 @@ A **Precondition** is that the system is displaying the list of clients and pets
 
 * 1a. There are no pets to delete.
 
+    * 1a1. System notifies user.
      Use case ends.
 
 * 2a. The given parameters are invalid.
@@ -466,7 +469,7 @@ A **Precondition** is that the system is displaying the list of clients and pets
 
 **MSS**
 
-1.  User finds the client to edit.
+1.  User finds a client to edit.
 2.  User requests to edit the client.
 3.  System edits the client and displays the updated list.
 
@@ -476,6 +479,7 @@ A **Precondition** is that the system is displaying the list of clients and pets
 
 * 1a. There are no clients to edit.
 
+    * 1a1. System notifies user.
      Use case ends.
 
 * 2a. The given parameters are invalid.
@@ -490,7 +494,7 @@ A **Precondition** is that the system is displaying the list of clients and pets
 
 **MSS**
 
-1.  User finds the pet to edit.
+1.  User finds a pet to edit.
 2.  User requests to edit the pet.
 3.  System edits the pet and displays the updated list.
 
@@ -500,6 +504,7 @@ A **Precondition** is that the system is displaying the list of clients and pets
 
 * 1a. There are no pets to edit.
 
+    * 1a1. System notifies user.
      Use case ends.
 
 * 2a. The given parameters are invalid.
@@ -514,48 +519,60 @@ A **Precondition** is that the system is displaying the list of clients and pets
 
 **MSS**
 
-1.  User looks for the client using keywords.
-2.  User looks for their pet.
+1.  User looks for the pet using keywords.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The pet does not exist.
+* 1a. The pet does not exist.
 
+    * 1a1. System notifies user.
      Use case ends.
 
-**Use case 8: Search for client who owns pet**
+**Use case 8: Search for client**
 
 **MSS**
 
-1.  User looks for the pet using keywords.
-2.  User looks for the client.
+1.  User looks for the client using keywords.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. There are many pets with the same name.
+* 1a. The pet does not exist.
 
-    * 1a1. User decides which client is the one they want.
+    * 1a1. System notifies user.
+     Use case ends.
 
-      Use case resumes at step 2.
+**Use case 9: Delete all records**
+
+**MSS**
+
+1.  User clears all stored client and pet information.
+2.  System deletes all records and displays the empty list.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The records are already empty.
+
+     Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 clients with 5 pets each without a noticeable sluggishness in performance for typical usage.
+1.  Should work on any _mainstream OS_ as long as it has `Java 17` or above installed.
+2.  Should be able to hold up to 200 clients with 3 pets each without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The response to any use action should become visible within 5 seconds.
+4. The response to any user action should become visible within 2 seconds.
 5. The app should not crash due to a user action (e.g., entering an invalid command, or deleting a client that does not exist).
-6. The app should not crash due to a system error (e.g., hard disk failure, or running out of memory).
-7. The app should not crash due to a programmer error (e.g., null pointer exception, or array index out of bounds exception).
-8. Should not have a steep learning curve for users who are reasonably comfortable using CLI apps.
+6. The app should not crash due to a programmer error (e.g., null pointer exception, or array index out of bounds exception).
+7. Should not have a steep learning curve for users who are reasonably comfortable using CLI apps.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Above average typing speed**: 40 words per minute (wpm) or above, where a word is defined as 5 characters including spaces.
 * **Noticeable sluggishness**: A noticeable delay in the response of the app to user actions, such as a delay in showing the result of a command, or a delay in updating the UI after a command is executed.
