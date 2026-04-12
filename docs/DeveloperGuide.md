@@ -401,6 +401,7 @@ A **Precondition** is that the system is displaying the list of clients and pets
 
 * 1a. There are no existing clients to add pets to.
 
+    * 1a1. System notifies user.
      Use case ends.
 
 * 2a. The given parameters are invalid.
