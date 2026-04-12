@@ -21,7 +21,7 @@ so that after grooming a pet, you can quickly find the details of the owner and 
 
 1. [Install](https://se-education.org/guides/tutorials/javaInstallation.html) `Java 17` or higher to your computer.
 
-   * `Java 17` is the software that Hairy Pawter runs on.
+   * `Java 17` is reputable software that Hairy Pawter needs to function.
 <br><br>
 
 1. Download `hairypawter.jar` from the latest release [here](https://github.com/AY2526S2-CS2103T-F14-2/tp/releases).
@@ -96,7 +96,7 @@ Format: `help`
 
 ### Adding a client: `addClient`
 
-Registers a new client. The new client will be shown at the top the list unless there is a restriction imposed by `find`.
+Registers a new client. The new client will be shown at the top of the list.
 
 <box type="tip" seamless>
 
@@ -108,6 +108,12 @@ Format: `addClient p/PHONE [n/NAME] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 Examples:
 * `addClient n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `addClient n/Betsy Crowe t/friend e/betsycrowe@example.com a/Crown street p/1234567`
+
+Remarks:
+The new client may not be shown if there is a `find` condition that it does not satisfy.
+If this happens, use `list` to show all clients.
+
+Optional values will appear as `-`.
 
 <box type="info" seamless>
 
@@ -131,6 +137,9 @@ Format: `addPet n/NAME p/PHONE [s/SPECIES] [b/BREED] [nt/NOTES] [ph/PHOTO]`
 Examples:
 * `addPet n/Snowy p/0000 s/Dog b/Wire Fox Terrier (White)`
 * `addPet n/Meowy p/123456`
+
+Remarks:
+Optional values will appear as `Unknown` or `None`.
 
 **Using `[nt/NOTES]` to your advantage:**<br>
 
