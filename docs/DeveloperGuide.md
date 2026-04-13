@@ -661,109 +661,95 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a client
 
-1. Adding a client
-
-   1. Test case: `addClient n/name p/12345678 e/a@gmail.com a/#11-11 11 Eleven Road, 111111 t/11/11/11`<br>
+1. Test case: `addClient n/name p/12345678 e/a@gmail.com a/#11-11 11 Eleven Road, 111111 t/11/11/11`<br>
       Expected: Client is added to the list. Details of the client shown in the status message.
 
-   1. Other correct commands to try: Case-insensitive, alias `ac`, reordered fields, missing fields<br>
+    * Other correct commands to try: case-insensitive `addclient`, alias `ac`, reordered fields, missing fields<br>
       Expected: Similar to previous.
 
-   1. Test case: `addClient  n/name e/1@gmail.com a/#11-11 11 Eleven Road, 111111 t/11/11/11`<br>
+2. Test case: `addClient  n/name e/1@gmail.com a/#11-11 11 Eleven Road, 111111 t/11/11/11`<br>
       Expected: No client is added. Error details shown in the status message.
 
-   1. Other incorrect commands to try: `addClient`, repeat parameters<br>
-      Expected: Similar to previous.
+   * Other incorrect commands to try: `addClient`, repeat parameters<br>
+         Expected: Similar to previous.
 
 ### Editing a client
 
-1. Editing a client using their index
-
-   1. Test case: `editClient 1 n/new name p/22 e/2@gmail.com a/"22 Next Door" t/`<br>
+1. Test case: `editClient 1 n/new name p/22 e/2@gmail.com a/"22 Next Door" t/`<br>
       Expected: Client with index 1 is changed. Details of the client shown in the status message.
 
-   1. Other correct commands to try: Case-insensitive, alias `ec`, reordered fields, missing fields<br>
-      Expected: Similar to previous.
+   * Other correct commands to try: case-insensitive `editclient`, alias `ec`, reordered fields, missing fields<br>
+         Expected: Similar to previous.
 
-   1. Test case: `editClient 1 p/123`, where there already is a client with phone number 123 that is not in index 1<br>
+2. Test case: `editClient 1 p/123`, where there already is a client with phone number 123 that is not in index 1<br>
       Expected: No change in the list. Error details shown in the status message.
 
-   1. Other incorrect commands to try: `editClient`, repeat parameters<br>
+   * Other incorrect commands to try: `editClient`, repeat parameters<br>
       Expected: Similar to previous.
 
 ### Deleting a client
-
-1. Deleting a client using their index
-
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    1. Test case: `deleteClient 1`<br>
       Expected: Client with index 1 is deleted from the list. Details of the deleted client shown in the status message.
 
-   1. Other correct commands to try: Case-insensitive, alias `dc`, filtered list using `find`<br>
-      Expected: Similar to previous.
+      * Other correct commands to try: case-insensitive `deleteclient`, alias `dc`, filtered list using `find`<br>
+            Expected: Similar to previous.
 
    1. Test case: `deleteClient 0`<br>
       Expected: No client is deleted. Error details shown in the status message.
 
-   1. Other incorrect commands to try: `deleteClient`, `deleteClient x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+      * Other incorrect commands to try: `deleteClient`, `deleteClient x`, `...` (where x is larger than the list size)<br>
+         Expected: Similar to previous.
 
 ### Adding a pet
-
-1. Adding a pet
 
    1. Test case: `addPet n/name p/87438807 s/dog b/beagle nt/paws sensitive` where the client with the phone number already exists<br>
       Expected: Pet is added beside the client. Details of the pet shown in the status message.
 
-   1. Other correct commands to try: Case-insensitive, alias `ap`, reordered fields, missing fields, adding photo path<br>
-      Expected: Similar to previous.
+      * Other correct commands to try: case-insensitive `addpet`, alias `ap`, reordered fields, missing fields, adding photo path<br>
+                  Expected: Similar to previous.
 
    1. Test case: `addPet n/name`<br>
       Expected: No pet is added. Error details shown in the status message.
 
-   1. Other incorrect commands to try: `addPet`, repeat parameters<br>
-      Expected: Similar to previous.
+      1. Other incorrect commands to try: `addPet`, repeat parameters<br>
+         Expected: Similar to previous.
 
 ### Editing a pet
-
-1. Editing a pet using its index
-
-   1. Prerequisites: List all pets using the `list` command. Multiple pets in the list.
+Prerequisites: List all pets using the `list` command. Multiple pets in the list.
 
    1. Test case: `editPet 1 n/nyeow s/Cat b/Tabby nt/skin allergies`<br>
       Expected: Pet with index 1 is edited. Details of the pet shown in the status message.
 
-   1. Other correct commands to try: Case-insensitive, alias `ep`, filtered list using `find`<br>
-      Expected: Similar to previous.
+      * Other correct commands to try: case-insensitive `editpet`, alias `ep`, filtered list using `find`<br>
+                  Expected: Similar to previous.
 
-   1. Test case: `editPet 0 n/that`<br>
-      Expected: No edit happens. Error details shown in the status message.
+   2. Test case: `editPet 0 n/that`<br>
+            Expected: No edit happens. Error details shown in the status message.
 
-   1. Other incorrect commands to try: `editPet`, `editPet x`, (where x is larger than the list size), editing to a pet with the same name and owner as another<br>
-      Expected: Similar to previous.
+      * Other incorrect commands to try: `editPet`, `editPet x`, (where x is larger than the list size), editing to a pet with the same name and owner as another<br>
+                  Expected: Similar to previous.
 
 ### Deleting a pet
 
-1. Deleting a pet using its index
+Prerequisites: List all pets using the `list` command. Multiple pets in the list.
 
-   1. Prerequisites: List all pets using the `list` command. Multiple pets in the list.
-
-   1. Test case: `deletePet 1`<br>
+1. Test case: `deletePet 1`<br>
       Expected: Pet with index 1 is deleted from the list. Details of the deleted pet shown in the status message.
 
-   1. Other correct commands to try: Case-insensitive, alias `dp`, filtered list using `find`<br>
+   * Other correct commands to try: case-insensitive `deletepet`, alias `dp`, filtered list using `find`<br>
       Expected: Similar to previous.
 
-   1. Test case: `deletePet 0`<br>
+2. Test case: `deletePet 0`<br>
       Expected: No pet is deleted. Error details shown in the status message.
 
-   1. Other incorrect commands to try: `deletePet`, `deletePet x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   * Other incorrect commands to try: `deletePet`, `deletePet x`, `...` (where x is larger than the list size)<br>
+            Expected: Similar to previous.
 
 ### Finding clients and pets
 
-1. Finding clients and pets that (partially) match **all** keywords.
+Finding clients and pets that (partially) match **all** keywords.
 
    1. Test case: `find alex`, given client `Alex Yeoh` exists and nobody else matches `alex`<br>
       Expected: Only client `Alex Yeoh` is displayed.
@@ -774,23 +760,22 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `find xyzzy`<br>
       Expected: No clients displayed. Status message shows `0 clients listed`.
 
-   1. Other correct commands to try: Partial matches across all keywords, matching across owner and pet<br>
-      Expected: If a client or pet matches all keywords, the client and all their pets are displayed.
+      * Other correct commands to try: Partial matches across all keywords, matching across owner and pet<br>
+            Expected: If a client or pet matches all keywords, the client and all their pets are displayed.
 
 ### Listing all clients and pets
+Restoring the full list after a `find` command.
 
-1. Restoring the full list after a `find` command.
-
-   1. Prerequisites: Run `find alex` so the list is filtered.
+Prerequisites: Run `find alex` so the list is filtered.
 
    1. Test case: `list`<br>
       Expected: All clients and their pets are shown. Status message confirms the full list is displayed.
 
 ### Adding grooming notes
 
-1. Adding and clearing a grooming note on a pet.
+Adding and clearing a grooming note on a pet.
 
-   1. Prerequisites: At least one client exists. Use `list` to confirm.
+Prerequisites: At least one client exists. Use `list` to confirm.
 
    1. Test case: `addPet n/Max p/87438807 s/Dog b/Beagle nt/Sensitive to loud noises` where the client with phone `87438807` exists<br>
       Expected: Pet is added with the grooming note visible in the UI.
@@ -802,10 +787,7 @@ testers are expected to do more *exploratory* testing.
       Expected: The client owning that pet is shown, because grooming notes are included in search.
 
 ### Adding and editing a pet photo
-
-1. Adding a photo to a pet.
-
-   1. Prerequisites: Place an image file (e.g., `max.png`) inside the `data/photos/` directory. Use `list` to confirm at least one client exists.
+Prerequisites: Place an image file (e.g., `max.png`) inside the `data/photos/` directory. Use `list` to confirm at least one client exists.
 
    1. Test case: `addPet n/Max p/87438807 s/Dog b/Beagle pic/max.png`<br>
       Expected: Pet is added with the photo displayed in the UI.
@@ -820,8 +802,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No pet added. Error message shown (path traversal outside `data/photos/` is blocked).
 
 ### Using tags
-
-1. Adding and clearing tags on a client.
+Adding and clearing tags on a client.
 
    1. Test case: `addClient n/Alice p/91234567 e/alice@example.com a/123 Street t/VIP`<br>
       Expected: Client added with a `VIP` tag shown.
@@ -837,9 +818,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Clearing all records
 
-1. Clearing the address book.
-
-   1. Prerequisites: At least one client exists.
+Prerequisites: At least one client exists.
 
    1. Test case: `clear`<br>
       Expected: All clients and pets are deleted. An empty list is shown.
@@ -848,8 +827,6 @@ testers are expected to do more *exploratory* testing.
       Expected: The list remains empty. No error shown.
 
 ### Help and exit
-
-1. Opening help and exiting.
 
    1. Test case: `help`<br>
       Expected: A help window opens showing command usage information.
